@@ -15,8 +15,9 @@ destroyed when no longer in use."
 shared_ptr<Resource> ResourceManager::getResource(const string &name)
 {
     {
-        lock_guard<mutex> lock(mtx);
+        // lock_guard<mutex> lock(mtx);
         auto it = resources.find(name);
+        shared_lock<shared_mutex> readLock(shmtx);
 
         if (it != resources.end())
         {
@@ -28,7 +29,8 @@ shared_ptr<Resource> ResourceManager::getResource(const string &name)
 
     shared_ptr<Resource> resource = make_shared<Resource>(name);
     {
-        lock_guard<mutex> lock(mtx);
+        // lock_guard<mutex> lock(mtx);
+        shared_lock<shared_mutex> writelock(shmtx);
         auto it = resources.find(name);
         if (it != resources.end())
         {

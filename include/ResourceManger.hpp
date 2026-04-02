@@ -5,12 +5,14 @@
 #include "Resource.hpp"
 #include <thread>
 #include <mutex>
+#include <shared_mutex>
 
 class ResourceManager
 {
 private:
     std::map<string, shared_ptr<Resource>> resources;
     std::mutex mtx;
+    std::shared_mutex shmtx;
 
 public:
     shared_ptr<Resource> getResource(const string &name);
