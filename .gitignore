@@ -1,0 +1,16 @@
+# Build files
+build/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+
+# Executables
+*.out
+*.exe
+
+# Object files
+*.o
+
+# VSCode (optional)
+.vscode/
+
